@@ -1,4 +1,3 @@
-const { callbackPromise } = require('nodemailer/lib/shared')
 const allowedOrigins = require('./allowedOrigins')
 
 const corsOptions ={
