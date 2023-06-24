@@ -18,8 +18,8 @@ const authRoutes = require("./routes/authRoutes");
 
 connectDB();
 const app = express();
-//app.use(cors());
-app.use(cors(corsOptions))
+app.use(cors());
+//app.use(cors(corsOptions))
 app.use(express.static(path.resolve(__dirname, "../frontend/build")));
 
 app.get("/", function (request, response) {
