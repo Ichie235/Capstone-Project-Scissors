@@ -1,12 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import Navbar from './Navbar';
-import UrlCard from './UrlCard';
-import Loader from './Loader';
+import Navbars from "./Navbar";
+import UrlCard from "./UrlCard";
+import Container from "react-bootstrap/Container";
+import "../assets/css/shortener.css"
 
 function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState("");
 
   const [urls, setUrls] = useState([]);
 
@@ -18,25 +19,25 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
       : `Bearer ${loginData.token}`;
 
     let api_url =
-    //   process.env.NODE_ENV === 'production'
-        `http://localhost:5050/api/urls/?user=${loginData.email}`
-        // : `http://localhost:5000/api/urls/?user=${loginData.email}`;
+      //   process.env.NODE_ENV === 'production'
+      `http://localhost:5050/api/urls/?user=${loginData.email}`;
+    // : `http://localhost:5000/api/urls/?user=${loginData.email}`;
 
     console.log(
-      '🚀 ~ file: Shortener.js ~ line 21 ~ useEffect ~ api_url',
+      "🚀 ~ file: Shortener.js ~ line 21 ~ useEffect ~ api_url",
       api_url,
       process.env.NODE_ENV
     );
 
     let headers = {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization,
     };
 
     setLoading(true);
 
     fetch(api_url, {
-      method: 'GET',
+      method: "GET",
       headers,
     })
       .then((response) => {
@@ -54,9 +55,9 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
   }, []);
 
   const generateKey = (length) => {
-    let result = '';
+    let result = "";
     let characters =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0987654321';
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0987654321";
     let charlen = characters.length;
 
     for (let index = 0; index < length; index++) {
@@ -88,14 +89,14 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
       let api_url = `http://localhost:5050/api/urls/encrypt/`;
 
       let headers = {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization,
       };
 
       setLoading(true);
 
       fetch(api_url, {
-        method: 'POST',
+        method: "POST",
         headers,
         body: JSON.stringify({
           user: loginData.email,
@@ -106,7 +107,7 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
         .then((response) => response.json())
         .then((json) => {
           setUrls(urls.length ? [...urls, json].reverse() : [...urls, json]);
-          setUrl('');
+          setUrl("");
           setLoading(false);
         })
         .catch((error) => {
@@ -114,8 +115,8 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
           setLoading(false);
         });
     } else {
-      alert('Please enter a valid URL');
-      setUrl('');
+      alert("Please enter a valid URL");
+      setUrl("");
     }
   };
 
@@ -134,12 +135,12 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
       let api_url = `http://localhost:5050/api/urls/`;
 
       let headers = {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization,
       };
       setLoading(true);
       fetch(api_url, {
-        method: 'POST',
+        method: "POST",
         headers,
         body: JSON.stringify({
           user: loginData.email,
@@ -149,7 +150,7 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
         .then((response) => response.json())
         .then((json) => {
           setUrls([...urls, json].reverse());
-          setUrl('');
+          setUrl("");
           setLoading(false);
         })
         .catch((error) => {
@@ -157,83 +158,51 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
           setLoading(false);
         });
     } else {
-      alert('Please enter a valid URL');
-      setUrl('');
+      alert("Please enter a valid URL");
+      setUrl("");
     }
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('loginData');
+    localStorage.removeItem("loginData");
     setLoginData(null);
   };
 
   return (
     <>
-      <Navbar
+      <Navbars
         loginData={loginData}
         handleApiKey={handleApiKey}
         handleLogout={handleLogout}
         setApiKey={setApiKey}
       />
-      {loading ? (
-        <div className="flex inline-block justify-center w-full mt-5 h-32 bg-gray-100 align-middle">
-          <Loader />
+     <h1 className="mt-3" style={{color:"white"}}>Enter a URL to Shorten</h1>
+      <Container className="shorten-container">
+        <input
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          type="url"
+          className="
+          form-shorten-controller"
+          placeholder="URL input"
+        />
+
+        <div className="d-grid mt-1 shortUrl-btn">
+          <button type="button"  className="btn btn-success" onClick={handleShorten} >
+            Shorten
+          </button>
         </div>
-      ) : (
-        <>
-          <div className="flex inline-block justify-center w-full  mt-5 h-32 bg-gray-100 align-middle">
-            <div className="mb-3">
-              <br />
-              <input
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                type="url"
-                className="
-            form-control
-            block
-            w-full
-            px-3
-            py-1.5
-            text-base
-            font-normal
-            text-gray-700
-            bg-white bg-clip-padding
-            border border-solid border-gray-300
-            rounded
-            transition
-            ease-in-out
-            m-0
-            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-          "
-                id="exampleURL0"
-                placeholder="URL input"
-              />
-              <div className="flex space-x-2 justify-center mt-5">
-                <div>
-                  <button
-                    type="button"
-                    onClick={handleShorten}
-                    className="inline-block px-6 py-2.5 bg-blue-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-lg hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                  >
-                    Shorten
-                  </button>
-                </div>
-                <div>
-                  {apiKey.length === 12 ? (
-                    <button
-                      type="button"
-                      onClick={handleShortenWithKey}
-                      className="inline-block px-6 py-2.5 bg-pink-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-lg hover:bg-pink-700 hover:shadow-lg focus:bg-pink-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-800 active:shadow-lg transition duration-150 ease-in-out"
-                    >
-                      Shorten with API Key
-                    </button>
-                  ) : null}
-                </div>
-              </div>
+        <div>
+          {apiKey.length === 12 ? (
+             <div className="d-grid mt-3 shortUrl-btn">
+            <button type="button" className="btn btn-success" onClick={handleShortenWithKey}>
+              Shorten with API Key
+            </button>
             </div>
-          </div>
-        </>
-      )}
+          ) : null}
+        </div>
+      </Container>
+
       {urls.map((url) => (
         <UrlCard
           key={url._id}
