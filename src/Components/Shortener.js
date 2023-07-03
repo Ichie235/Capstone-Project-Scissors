@@ -11,7 +11,7 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
 
   const [urls, setUrls] = useState([]);
 
-  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     let Authorization = loginData.googleUser
@@ -34,7 +34,6 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
       Authorization,
     };
 
-    setLoading(true);
 
     fetch(api_url, {
       method: "GET",
@@ -45,11 +44,11 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
       })
       .then((json) => {
         setUrls(json.reverse());
-        setLoading(false);
+       
       })
       .catch((error) => {
         console.log(error);
-        setLoading(false);
+      
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -93,7 +92,7 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
         Authorization,
       };
 
-      setLoading(true);
+  
 
       fetch(api_url, {
         method: "POST",
@@ -108,11 +107,11 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
         .then((json) => {
           setUrls(urls.length ? [...urls, json].reverse() : [...urls, json]);
           setUrl("");
-          setLoading(false);
+         
         })
         .catch((error) => {
           console.log(error);
-          setLoading(false);
+         
         });
     } else {
       alert("Please enter a valid URL");
@@ -138,7 +137,7 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
         "Content-Type": "application/json",
         Authorization,
       };
-      setLoading(true);
+      
       fetch(api_url, {
         method: "POST",
         headers,
@@ -151,11 +150,11 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
         .then((json) => {
           setUrls([...urls, json].reverse());
           setUrl("");
-          setLoading(false);
+         
         })
         .catch((error) => {
           console.log(error);
-          setLoading(false);
+        
         });
     } else {
       alert("Please enter a valid URL");
@@ -208,7 +207,6 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
           key={url._id}
           URL={url}
           loginData={loginData}
-          setLoading={setLoading}
           urls={urls}
           setUrls={setUrls}
         />

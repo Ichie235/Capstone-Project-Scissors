@@ -120,7 +120,7 @@ function Signup() {
             </button>
           </div>
           <p className="forgot-password text-right" style={{color:"whitesmoke"}}>
-             Have an account <span><a href="/" style={{color:"green"}}>sign In?</a></span>
+             Have an account <span><Link to='/' style={{color:"green"}}>sign In?</Link></span>
           </p>
         </form>
       </Container>

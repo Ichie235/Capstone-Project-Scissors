@@ -1,6 +1,6 @@
 import React from "react";
 import { UilTrashAlt } from "@iconscout/react-unicons";
-import { Container, Row, Col, Table } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 function UrlCard({ URL, loginData, setLoading, urls, setUrls }) {
   const { _id, url, shortUrl, user, encrypted } = URL;
