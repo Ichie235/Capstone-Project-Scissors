@@ -4,10 +4,10 @@ This repository contains code for a server-side application built with Node.js a
 # Table of Contents
 -- Installation
 -- Usage
--- Configuration
--- API Endpoints
--- Contributing
--- License
+-- Configuration <br>
+-- API Endpoints <br>
+-- Contributing <br>
+-- License <br>
 
 # Installation
 1) Clone the repository to your local machine:
@@ -36,54 +36,54 @@ node server.js
 The server provides the following API endpoints:
 
 # Get URLs
-Description: Retrieve URLs associated with a user.
--- Route: GET /api/urls
--- Access: Private
--- Request Query Parameters:
--- user (required): User ID or email
--- Response: JSON array of URLs
+Description: Retrieve URLs associated with a user. <br>
+-- Route: GET /api/urls <br>
+-- Access: Private <br>
+-- Request Query Parameters: <br>
+-- user (required): User ID or email <br>
+-- Response: JSON array of URLs <br>
 
 # Shorten and Set URL with a Key
-Description: Shorten a URL and associate it with a key for encryption.
--- Route: POST /api/urls/:key
--- Access: Private
--- Request Body Parameters:
-    `url` (required): Original URL
-     `user` (required): User ID or email
-       `key` (required): Key for encryption
---Response: JSON object of the created URL
+Description: Shorten a URL and associate it with a key for encryption. <br>
+-- Route: POST /api/urls/:key <br>
+-- Access: Private <br>
+-- Request Body Parameters: <br>
+    `url` (required): Original URL <br>
+     `user` (required): User ID or email <br>
+       `key` (required): Key for encryption <br>
+--Response: JSON object of the created URL <br>
 
 # Update URL
-Description: Update an existing URL.
--- Route: PUT /api/goals
--- Access: Private
--- Request Parameters:
+Description: Update an existing URL. <br>
+-- Route: PUT /api/goals <br>
+-- Access: Private <br> 
+-- Request Parameters: <br>
     `id` (required): URL ID
---Request Body: Updated URL data
--- Response: JSON object of the updated URL
+--Request Body: Updated URL data <br>
+-- Response: JSON object of the updated URL v
 
 # Delete URL
-Description: Delete an existing URL.
--- Route: GET /api/url
--- Access: Private
--- Request Parameters:
+Description: Delete an existing URL. <br>
+-- Route: GET /api/url <br>
+-- Access: Private <br>
+-- Request Parameters: <br>
     `id` (required): URL ID
---Request Body Parameters:
--- googleUser: Indicates whether the user is authenticated via Google (optional)
--- Response: JSON object of the deleted URL
+--Request Body Parameters: <br>
+-- googleUser: Indicates whether the user is authenticated via Google (optional) <br>
+-- Response: JSON object of the deleted URL <br>
 
 # Implementation Details
-The protect middleware function performs the following steps:
-Checks if the request contains the Authorization header.
--- If the header starts with "Bearer", it extracts the token and verifies it using the provided JWT_SECRET.
--- If the token is valid, it retrieves the user information from the decoded token and adds it to the request object.
--- If the header starts with "Google", it extracts the token and sets the user information based on the provided email in the request body.
--- If no token is found or the token is invalid, it returns a 401 "Not authorized" error.
+The protect middleware function performs the following steps: <br>
+Checks if the request contains the Authorization header. <br>
+-- If the header starts with "Bearer", it extracts the token and verifies it using the provided JWT_SECRET. <br>
+-- If the token is valid, it retrieves the user information from the decoded token and adds it to the request object. <br>
+-- If the header starts with "Google", it extracts the token and sets the user information based on the provided email in the request body. <br>
+-- If no token is found or the token is invalid, it returns a 401 "Not authorized" error. <br>
 
 # Contributing
-Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
-1)Fork the repository
-2) Create a new branch
-3) Make your changes
-4) Test your changes
-5) Submit a pull request
+Contributions are welcome! If you'd like to contribute to this project, please follow these steps: <br>
+1)Fork the repository <br>
+2) Create a new branch <br>
+3) Make your changes <br>
+4) Test your changes <br>
+5) Submit a pull request <br>
