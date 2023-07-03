@@ -1,5 +1,5 @@
 const allowedOrigins = [
-    'https://avvicbankcomingsoon-page.onrender.com'
+    'https://urlshortener-3v9h.onrender.com'
 ]
 
 module.exports=allowedOrigins
