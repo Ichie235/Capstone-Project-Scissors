@@ -5,7 +5,7 @@ let cors = require("cors");
 const { errorHandler } = require("./middleware/errorMiddleware");
 
 const connectDB = require("./config/db");
-const corsOptions = require('./config/corsOptions')
+
 const port = process.env.PORT || 3000;
 
 const dotenv = require("dotenv")
@@ -19,14 +19,13 @@ const authRoutes = require("./routes/authRoutes");
 connectDB();
 const app = express();
 app.use(cors());
-//app.use(cors(corsOptions))
 app.use(express.static(path.resolve(__dirname, "../frontend/build")));
 
 app.get("/", function (request, response) {
     // response.sendFile(
-    //     path.resolve(__dirname, "../frontend/build", "index.html")
+    //     path.resolve(__dirname, "../client/public", "index.html")
     // );
-    response.send('hello world')
+    response.send('<h1>hello world</h1>')
 });
 
 // app.use(cors({ credentials: true }));

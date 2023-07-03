@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 
 const User = require("../models/user");
@@ -25,12 +25,15 @@ const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
 
-    if (user && (await bcrypt.compare(password, user.password))) {
+    if (user && (await bcrypt.compare(password,user.password))) {
+        // const isMatch = await user.isValidPassword(password);
+        // return isMatch
+          //? done(null, user)
+        //   : done(null, false, { message: 'Incorrect password' });
         return res.json({
             _id: user.id,
             name: user.name,
             email: user.email,
-            // ssn: user.ssn,
             token: generateToken(user._id)
         });
     } else {
@@ -43,8 +46,9 @@ const loginUser = asyncHandler(async (req, res) => {
 //@route    GET /api/users
 //@access   public
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password, ssn } = req.body;
-    // console.log(name, email, password, ssn);
+    const { name, email, password } = req.body;
+    
+     console.log(name, email, password);
 
     if (!name || !email || !password) {
         //ssn optional
@@ -54,23 +58,24 @@ const registerUser = asyncHandler(async (req, res) => {
 
     //find user by email
     const userExists = await User.findOne({ email });
-
+     console.log(userExists)
     if (userExists) {
         res.status(400);
         throw new Error("User already exists");
     }
-
+    
     //Hash Password
-    const salt = await bcrypt.genSalt(10);
-
-    const hashedPassword = await bcrypt.hash(password, salt);
+    // const salt = await bcrypt.genSalt(10);
+    //    console.log(salt)
+    // const hashedPassword = await bcrypt.hash(password, salt);
+    // console.log(hashedPassword)
 
     //Create User
     const user = await User.create({
         name,
         email,
-        password: hashedPassword,
-        ssn
+        password: password,
+     
     });
 
     if (user) {
@@ -78,8 +83,7 @@ const registerUser = asyncHandler(async (req, res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
-            ssn: user.ssn,
-            password: hashedPassword
+            password: user.password
         });
     } else {
         res.status(400);
