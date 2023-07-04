@@ -5,6 +5,7 @@ let cors = require("cors");
 const { errorHandler } = require("./middleware/errorMiddleware");
 
 const connectDB = require("./config/db");
+const allowedOrigins = require("./config/allowedOrigins")
 
 const port = process.env.PORT || 3000;
 
