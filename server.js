@@ -19,13 +19,11 @@ const authRoutes = require("./routes/authRoutes");
 
 connectDB();
 const app = express();
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.static(path.resolve(__dirname, "../frontend/build")));
 
 app.get("/", function (request, response) {
-    // response.sendFile(
-    //     path.resolve(__dirname, "../client/public", "index.html")
-    // );
+    
     response.send('<h1>hello world</h1>')
 });
 
