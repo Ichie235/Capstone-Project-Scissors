@@ -1,12 +1,11 @@
-const { callbackPromise } = require('nodemailer/lib/shared')
 const allowedOrigins = require('./allowedOrigins')
 
 const corsOptions ={
     origin: (origin,callback)=>{
         if(allowedOrigins.indexOf(origin) !== -1 || !origin){
-            callback(null,true)
+           return true
         }else {
-            callback(new Error('Not allowed by CORS'))
+         new Error('Not allowed by CORS')
         }
     },
     Credentials: true,
