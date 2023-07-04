@@ -5,7 +5,7 @@ let cors = require("cors");
 const { errorHandler } = require("./middleware/errorMiddleware");
 
 const connectDB = require("./config/db");
-const allowedOrigins = require("./config/allowedOrigins")
+const corsOptions = require("./config/corsOptions")
 
 const port = process.env.PORT || 3000;
 
@@ -19,7 +19,7 @@ const authRoutes = require("./routes/authRoutes");
 
 connectDB();
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.static(path.resolve(__dirname, "../frontend/build")));
 
 app.get("/", function (request, response) {
