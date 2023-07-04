@@ -20,7 +20,7 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
 
     let api_url =
       //   process.env.NODE_ENV === 'production'
-      `http://localhost:5050/api/urls/?user=${loginData.email}`;
+      `http://localhost:8000/api/urls/?user=${loginData.email}`;
     // : `http://localhost:5000/api/urls/?user=${loginData.email}`;
 
     console.log(
@@ -85,7 +85,7 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
       : `Bearer ${loginData.token}`;
 
     if (url.match(regex)) {
-      let api_url = `http://localhost:5050/api/urls/encrypt/`;
+      let api_url = `http://localhost:8000/api/urls/encrypt/`;
 
       let headers = {
         "Content-Type": "application/json",
@@ -131,7 +131,7 @@ function Shortener({ loginData, setLoginData, apiKey, setApiKey }) {
       : `Bearer ${loginData.token}`;
 
     if (url.match(regex)) {
-      let api_url = `http://localhost:5050/api/urls/`;
+      let api_url = `http://localhost:8000/api/urls/`;
 
       let headers = {
         "Content-Type": "application/json",
