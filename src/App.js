@@ -37,7 +37,7 @@ function App() {
           }
         />
 
-        <Route path="/register" element={<Signup />} />
+        <Route path="register" element={<Signup />} />
       </Routes>
     </div>
   );
