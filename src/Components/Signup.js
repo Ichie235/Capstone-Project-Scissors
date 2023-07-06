@@ -30,7 +30,7 @@ function Signup() {
 
     if (email && passWord && name) {
       e.preventDefault();
-      let url = `http://localhost:8000/api/users/`;
+      let url = `https://urlshortener-api-4qsn.onrender.com/api/users`;
 
       fetch(url, {
         method: "POST",
