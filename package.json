@@ -1,6 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "homepage": "https://urlshortener-3v9h.onrender.com/",
   "proxy": "http://localhost:8000",
   "private": true,
   "dependencies": {
