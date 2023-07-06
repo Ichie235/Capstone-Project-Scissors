@@ -23,7 +23,7 @@ function Login({ loginData, setLoginData }) {
         return;
       }
 
-      var url = `http://localhost:8000/api/users/login`;
+      var url = `https://urlshortener-api-4qsn.onrender.com/api/users/login`;
       fetch(url, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
